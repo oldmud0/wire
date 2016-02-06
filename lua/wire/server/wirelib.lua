@@ -1137,6 +1137,7 @@ end
 function WireLib.MakeWireEnt( pl, Data, ... )
 	Data.Class = scripted_ents.Get(Data.Class).ClassName
 	if IsValid(pl) and not pl:CheckLimit(Data.Class:sub(6).."s") then return false end
+	if Data.Model and (hook.Run("CanModel", pl, Data.Model) == false) then return false end
 
 	local ent = ents.Create( Data.Class )
 	if not IsValid(ent) then return false end
